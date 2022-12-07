@@ -1,6 +1,6 @@
 <template>
   <TheHeader></TheHeader>
-  <CategorySelector></CategorySelector>
+  <CategorySelector @search="startSearch"></CategorySelector>
   <CardCreator></CardCreator>
 </template>
 
@@ -21,7 +21,13 @@ export default {
       store,
     };
   },
-
+  methods: {
+    startSearch(givenFilters) {
+      console.log(givenFilters);
+      this.store.activeFilters = givenFilters;
+      fetchPeople();
+    },
+  },
   mounted() {
     fetchPeople();
   },
