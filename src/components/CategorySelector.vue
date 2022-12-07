@@ -1,24 +1,27 @@
 <template>
   <div class="container">
-    <select name="" id="" v-model="filters.gender" @change="onFilter()">
-      <option value="">Select gender</option>
-      <option value="male">Maschio</option>
-      <option value="female">Femmina</option>
-    </select>
-    <select name="" id="" v-model="filters.weight" @change="onFilter()">
-      <option value="">Select weight</option>
-      <option value="50">Peso piuma (0-50)</option>
-      <option value="51">Peso superiore(51+)</option>
-    </select>
+    <form action="" class="form-group" @submit.prevent="onFilter()">
+      <input
+        placeholder="Inserisci il nome del personaggio che vuoi cercare"
+        type="text"
+        class="form-control"
+        v-model="filters.searchedName"
+      />
+      <button type="submit" class="my-btn">Avvia ricerca</button>
+    </form>
   </div>
 </template>
 <style lang="scss" scoped>
 .container {
   padding: 24px 8px;
-  select {
-    border-radius: 4px;
-    margin: 4px;
-    padding-inline-end: 8px;
+  form {
+    display: flex;
+    .my-btn {
+      background-color: bisque;
+      border: 1px solid rgb(251, 217, 175);
+      border-radius: 4px;
+      margin-left: 24px;
+    }
   }
 }
 </style>
@@ -28,15 +31,14 @@ export default {
   data() {
     return {
       filters: {
-        weight: "",
-        gender: "",
+        searchedName: "",
       },
     };
   },
   emits: ["search"],
   methods: {
     onFilter() {
-      parseInt(this.filters.weight);
+      console.log(this.filters.searchedName);
       this.$emit("search", { ...this.filters });
     },
   },
